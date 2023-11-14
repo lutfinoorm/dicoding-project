@@ -57,7 +57,7 @@ function putBook(bookObject) {
   redButton.innerText = 'Hapus buku'
 
   redButton.addEventListener('click', () => {
-    removingBook(bookObject.id)
+    removingBook(bookObject)
   })
 
   const actionContainer = document.createElement('div');
@@ -107,13 +107,15 @@ function findBook(bookId){
 } 
 
 
-function removingBook(bookId){
+function removingBook(book){
   console.log("hapus buku")
 
-  const bookTarget = findBookIndex(bookId);
+  const bookTarget = findBookIndex(book.id);
 
-  console.log(bookTarget)
   if (bookTarget === -1) return ;
+  
+  let confirmDelete = confirm(`Are you sure you want to delete ${book.title}?`);
+  if (!confirmDelete) return; 
 
   books.splice(bookTarget, 1);
   document.dispatchEvent(new Event(RENDER_EVENT));
