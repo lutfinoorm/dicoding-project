@@ -1,5 +1,7 @@
 const books = [];
 const RENDER_EVENT = 'render-book';
+const SAVED_EVENT = 'saved-book';
+const STORAGE_KEY = 'SHELF_APPS';
 
 document.addEventListener('DOMContentLoaded', function () {
   const submitForm = document.getElementById('inputBook');
@@ -43,9 +45,9 @@ function putBook(bookObject) {
   const greenButton = document.createElement('button')
   greenButton.classList.add('green');
   if (bookObject.isCompleted){
-    greenButton.innerText = 'Belum selesai dibaca';
+    greenButton.innerText = 'Not Completed';
   } else {
-    greenButton.innerText = 'Selesai dibaca';
+    greenButton.innerText = 'Completed';
   }
 
   greenButton.addEventListener('click', () => {
@@ -54,7 +56,7 @@ function putBook(bookObject) {
 
   const redButton = document.createElement('button')
   redButton.classList.add('red');
-  redButton.innerText = 'Hapus buku'
+  redButton.innerText = 'Delete'
 
   redButton.addEventListener('click', () => {
     removingBook(bookObject)
@@ -108,8 +110,6 @@ function findBook(bookId){
 
 
 function removingBook(book){
-  console.log("hapus buku")
-
   const bookTarget = findBookIndex(book.id);
 
   if (bookTarget === -1) return ;
@@ -158,5 +158,22 @@ function ResetAllForm() {
   document.getElementById("searchBookTitle").value = "";
 }
 
+function saveData(){
+  if (isStorageExist) {
+    const parsed = JSON.stringify(books);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
+  }
+}
+function isStorageExist(){
+  if (typeof (Storage) === undefined) {
+    alert("Your browser does not support local storage");
+    return false;
+  }
 
+  return true;
+}
 
+document.addEventListener(SAVED_EVENT, () => {
+  console.log(localStorage.getItem(STORAGE_KEY))
+})
