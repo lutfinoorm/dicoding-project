@@ -23,6 +23,7 @@ function addNewBook(){
  
   const generatedID = generateId();
   const bookObject = generateTodoObject(generatedID, bookTitle, bookAuthor, bookYear, isBookCompleted);
+  console.log(generateTodoObject)
   books.push(bookObject);
 
   ResetAllForm();
@@ -35,20 +36,20 @@ function generateId() {
   return +new Date();
 }
 
-function generateTodoObject(id, title, author, year, isCompleted) {
+function generateTodoObject(id, title, author, year, isComplete) {
   return {
-    id,
-    title,
-    author,
-    year,
-    isCompleted
+    id: id,
+    title: title,
+    author: author,
+    year: year,
+    isComplete: isComplete,
   }
 }
 
 function putBook(bookObject) {
   const greenButton = document.createElement('button')
   greenButton.classList.add('green');
-  if (bookObject.isCompleted){
+  if (bookObject.isComplete){
     greenButton.innerText = 'Not Completed';
   } else {
     greenButton.innerText = 'Completed';
@@ -99,10 +100,10 @@ function movingBook(bookId) {
     alert("Moving Shelf");
   }, 0)
 
-  if (bookTarget.isCompleted) {
-    bookTarget.isCompleted = false;
+  if (bookTarget.isComplete) {
+    bookTarget.isComplete = false;
   } else {
-    bookTarget.isCompleted = true;
+    bookTarget.isComplete = true;
   }
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
@@ -153,7 +154,7 @@ document.addEventListener(RENDER_EVENT, () => {
 
   for (const book of books){
     const bookElement = putBook(book);
-    if (book.isCompleted === false){
+    if (book.isComplete === false){
       incompleteBookshelf.append(bookElement);
     } else {
       completeBookshelf.append(bookElement);
