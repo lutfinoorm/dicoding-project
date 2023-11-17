@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function addNewBook(){
   const bookTitle = document.getElementById('inputBookTitle').value;
   const bookAuthor = document.getElementById('inputBookAuthor').value;
-  const bookYear = parseInt(document.getElementById('inputBookYear').value);
+  const bookYear = document.getElementById('inputBookYear').value;
   const isBookCompleted = document.getElementById('inputBookIsComplete').checked;
  
   const generatedID = generateId();
@@ -187,7 +187,6 @@ function isStorageExist(){
 
 document.addEventListener(SAVED_EVENT, () => {
   // alert("Moving Shelf");
-  // console.log(localStorage.getItem(STORAGE_KEY))
 })
 
 function loadDataFromStorage(){
