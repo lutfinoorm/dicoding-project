@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     addNewBook();
   });
+
+  if(isStorageExist){
+    loadDataFromStorage();
+  }
 });
 
 function addNewBook(){
@@ -54,17 +58,21 @@ function putBook(bookObject) {
     movingBook(bookObject.id)
   })
 
-  const redButton = document.createElement('button')
+  const redButton = document.createElement('button');
   redButton.classList.add('red');
-  redButton.innerText = 'Delete'
+  redButton.innerText = 'Delete';
 
   redButton.addEventListener('click', () => {
     removingBook(bookObject)
   })
 
+  const editButton = document.createElement('button');
+  editButton.classList.add('green');
+  editButton.innerText = 'Edit';
+
   const actionContainer = document.createElement('div');
   actionContainer.classList.add('action');
-  actionContainer.append(greenButton, redButton)
+  actionContainer.append(greenButton, editButton, redButton)
 
   const titleElement = document.createElement('h3');
   titleElement.innerText = bookObject.title;
@@ -87,6 +95,9 @@ function putBook(bookObject) {
 function movingBook(bookId) {
   const bookTarget = findBook(bookId);
   if (bookTarget == null ) return;
+  setTimeout(() => {
+    alert("Moving Shelf");
+  }, 0)
 
   if (bookTarget.isCompleted) {
     bookTarget.isCompleted = false;
@@ -175,5 +186,18 @@ function isStorageExist(){
 }
 
 document.addEventListener(SAVED_EVENT, () => {
-  console.log(localStorage.getItem(STORAGE_KEY))
+  // alert("Moving Shelf");
 })
+
+function loadDataFromStorage(){
+  const serialData = localStorage.getItem(STORAGE_KEY);
+  let data = JSON.parse(serialData);
+
+  if (data !== null) {
+    for (const book of data){
+      books.push(book);
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT))
+}

@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Reading List</title>
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Gabarito&family=Lato&family=Montserrat:wght@600&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -19,7 +19,6 @@
     <p>An app to control all books currently reading.</p>
   </header>
 
-  <!-- Pemisah bagian header dan konten -->
 
   <main>
     <section class="input_section">
@@ -51,23 +50,26 @@
         <label for="searchBookTitle">Title</label>
         <input id="searchBookTitle" type="text">
         <button id="searchSubmit" type="submit">Search</button>
+
+        <div id="searchBooksList" class="book_list"></div>
       </form>
     </section>
-    
-    <section class="book_shelf">
-      <h2>Not Completed</h2>
-      
-      <div id="incompleteBookshelfList" class="book_list"></div>
-    </section>
-    
-    <section class="book_shelf">
-      <h2>Completed</h2>
-      
-      <div id="completeBookshelfList" class="book_list"></div>
-    </section>
-  </main>
 
-  <!-- Pemisah bagian konten dan footer -->
+    <div class="container">
+      <section class="book_shelf">
+        <h2>Shelf Uncompleted</h2>
+        
+        <div id="incompleteBookshelfList" class="book_list"></div>
+      </section>
+      
+      <section class="book_shelf">
+        <h2>Shelf Completed</h2>
+        
+        <div id="completeBookshelfList" class="book_list"></div>
+      </section>
+    </div>
+    
+  </main>
 
   <footer>
     <p>inspired by <a href="https://www.dicoding.com/">Dicoding</a> Project: <a href="https://www.dicoding.com/academies/315">Belajar Membuat Front-End Web untuk pemula</a></p>
