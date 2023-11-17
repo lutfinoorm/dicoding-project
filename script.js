@@ -137,7 +137,7 @@ function removingBook(book){
 function findBookIndex(bookId){
   for (const index in books){
 
-    if (books[index].id = bookId){
+    if (books[index].id === bookId){
       return index;
     }
   }
